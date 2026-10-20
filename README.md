@@ -1,6 +1,6 @@
-# Crono — Dashboard
+# CRM Dashboard
 
-A pixel-faithful rebuild of the Crono dashboard screen from the provided Figma design, in
+A pixel-faithful rebuild of a CRM dashboard screen from the provided Figma design, in
 React + TypeScript.
 
 **Live:** <https://crm-dashboard-crono.vercel.app> — Vercel, built from `main`, with
@@ -55,7 +55,7 @@ design assets were asked for rather than substituted.
 | Choice                       | Why                                                            |
 | ---------------------------- | -------------------------------------------------------------- |
 | Vite + React 19 + TypeScript | Required by the brief; minimal scaffold, strict mode on        |
-| Tailwind CSS v4              | Crono's internal choice; tokens declared CSS-first in `@theme` |
+| Tailwind CSS v4              | Utility-first; tokens declared CSS-first in `@theme`           |
 | Radix UI primitives          | Accessible, unstyled `DropdownMenu` / `Tooltip` / `ScrollArea` |
 | TanStack Query v5            | Loading states and optimistic mutations over a simulated API   |
 | Vitest + Testing Library     | Covers the one required interaction                            |
