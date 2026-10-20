@@ -9,7 +9,23 @@ the Action menu and KPI tooltip open at (37, 892). The first frame is 1:1, so a
 design coordinate maps to a viewport coordinate by subtracting (37, 92) at a
 1440-wide viewport.
 
-Nothing here is estimated by eye. Each section says how the value was obtained.
+Nothing here is estimated by eye. Each section says how the value was obtained,
+and the scripts that obtained it live in [`.design-tools/`](../.design-tools/README.md).
+
+There are two sources, and they answer different questions:
+
+- **The export** is what the screen is judged against, so it is the source of
+  truth for anything visible: colour, position, size, spacing. A PNG cannot be
+  read as numbers directly, so every value from it went through one of the
+  scripts in `.design-tools/`.
+- **The Figma file**, read through the Figma MCP from an editable copy, gives
+  what the designer authored: the layer tree, its geometry, and the values a
+  rasterised image cannot recover reliably, such as font weight and line
+  height.
+
+Where the two disagree, the export wins. The file carries an `Arrow, Forward`
+layer in the sidebar header at (184, 48) that the export does not draw, so the
+build does not draw it either.
 
 ---
 
@@ -61,7 +77,8 @@ Sizes were first derived by measuring each string's ink width in the export and
 solving for the font size whose canvas `actualBoundingBox` metrics match that
 width — a method validated against a string of known size, accurate to 0.3px.
 That is reliable for size but **cannot recover weight**; the weights and line
-heights below are the designer's own Figma values.
+heights below are the designer's own values, read from the file through the
+Figma MCP.
 
 **Weight can be recovered from a @3x export**, and two of them were wrong. At 3x
 a glyph has nine samples per CSS pixel, so counting ink pixels inside a string's
