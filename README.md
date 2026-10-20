@@ -102,7 +102,9 @@ menu and the KPI tooltip open.
 Nothing in this implementation is estimated by eye. Colours are sampled from the export,
 font sizes solved from measured ink widths, and corner radii verified by diffing rendered
 corner profiles against it. [`docs/design-notes.md`](docs/design-notes.md) records every
-value and the method behind it.
+value and the method behind it. The scripts behind it are in
+[`.design-tools/`](.design-tools/README.md) — nineteen single-purpose probes that turn the
+export into numbers, plus the diff harness used to check a render against it.
 
 ### Side by side
 

@@ -9,7 +9,8 @@ the Action menu and KPI tooltip open at (37, 892). The first frame is 1:1, so a
 design coordinate maps to a viewport coordinate by subtracting (37, 92) at a
 1440-wide viewport.
 
-Nothing here is estimated by eye. Each section says how the value was obtained.
+Nothing here is estimated by eye. Each section says how the value was obtained,
+and the scripts that obtained it live in [`.design-tools/`](../.design-tools/README.md).
 
 ---
 
