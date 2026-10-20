@@ -23,7 +23,7 @@ export function TrialCard({ daysLeft }: { daysLeft: number }) {
       </p>
       <button
         type="button"
-        className="relative mt-1.5 inline-flex h-6 items-center gap-1.5 rounded-chip bg-accent-amber px-2 text-meta font-medium text-card"
+        className="relative mt-1.5 inline-flex h-6 items-center gap-1.5 rounded-chip bg-accent-amber px-2 text-meta font-medium text-card transition hover:brightness-95"
       >
         Upgrade plan
         <GiftIcon aria-hidden className="size-3" />

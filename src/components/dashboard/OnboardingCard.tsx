@@ -24,7 +24,13 @@ export function OnboardingCard({ steps }: { steps: OnboardingStep[] }) {
             key={step.title}
             className={i > 0 ? 'border-t border-border pt-4' : undefined}
           >
-            <div className="flex h-10 items-center justify-between pr-2">
+            {/* A button, not a div: a checklist row with a duration on it is an
+                affordance, and it was neither focusable nor clickable. The box
+                is unchanged, so the hover tint sits exactly on the 40px row. */}
+            <button
+              type="button"
+              className="flex h-10 w-full items-center justify-between rounded-lg pr-2 text-left transition-colors hover:bg-page"
+            >
               <div className="flex items-center gap-4">
                 <img src={step.icon} alt="" className="size-10 shrink-0" />
                 <span className="text-body leading-[22px] font-semibold text-ink">
@@ -34,7 +40,7 @@ export function OnboardingCard({ steps }: { steps: OnboardingStep[] }) {
               <span className="text-body leading-6 text-muted">
                 {step.minutes} min
               </span>
-            </div>
+            </button>
           </li>
         ))}
       </ul>

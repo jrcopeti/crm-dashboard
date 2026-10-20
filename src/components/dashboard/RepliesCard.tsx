@@ -24,7 +24,7 @@ export function RepliesCard({
             anchor to a fragment that does not exist is a broken affordance. */}
         <button
           type="button"
-          className="inline-flex items-center gap-1 text-body leading-[18px] font-medium text-brand-strong"
+          className="inline-flex items-center gap-1 text-body leading-[18px] font-medium text-brand-strong transition-opacity hover:opacity-80"
         >
           Open inbox
           <ChevronRight size={16} strokeWidth={2} aria-hidden />
