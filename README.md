@@ -3,29 +3,52 @@
 A pixel-faithful rebuild of the Crono dashboard screen from the provided Figma design, in
 React + TypeScript.
 
-**Live:** <https://frontend-challenge-crono.vercel.app> — Vercel, built from `main`, with
+**Live:** <https://crm-dashboard-crono.vercel.app> — Vercel, built from `main`, with
 a preview deployment on every PR.
 
 > Frontend engineer assessment.
 
 ![The dashboard at 1440x750, the width the design is drawn at](docs/screenshots/dashboard.png)
 
-## Quick start
+## How it was built
 
-```sh
-pnpm install
-pnpm dev
-```
+Built with [Claude Code](https://claude.com/claude-code), from two sources that describe
+the same screen in different ways: the Figma file, read through the **Figma MCP**, and
+the PNG export the submission is judged against. Neither one was enough on its own.
 
-| Command          | Purpose                        |
-| ---------------- | ------------------------------ |
-| `pnpm dev`       | Dev server                     |
-| `pnpm build`     | Typecheck + production build   |
-| `pnpm preview`   | Serve the production build     |
-| `pnpm lint`      | ESLint                         |
-| `pnpm typecheck` | TypeScript, no emit            |
-| `pnpm test`      | Vitest + React Testing Library |
-| `pnpm format`    | Prettier                       |
+**The Figma MCP gives intent.** Reading an editable copy of the file returns the layer
+tree: names, structure and geometry, as the designer authored them. But a layer is what
+was drawn in the file, not necessarily what the export shows. The sidebar header carries
+an `Arrow, Forward` layer at (184, 48) that the export never renders, so the layer data
+alone would have produced something the reference does not contain.
+
+**The export gives the result, but only as an image.** A model looking at a PNG can tell
+that a button is a teal pill; it cannot tell you it is `#1ebab2` at 90x32. So the build
+leans on a measurement harness, [`.design-tools/`](.design-tools/README.md): nineteen
+small Node scripts that turn the export into text. One reads the colour at a coordinate,
+one finds the darkest pixel of a glyph for true text ink, one lists ink bands down a
+column (which is how the 73px signal-row pitch and the 48px nav pitch were found), one
+traces a corner's profile for its radius.
+
+**Together they cover each other's blind spots.** The harness is better at checking a
+value than at finding one. Measuring ink width gives a font's size but not its weight, so
+weights and line heights were read from the Figma file through the MCP. Reading corner
+radii as raw pixel counts gave 12 and 8, because antialiasing makes a curve look tighter
+than it is; the real values were 16 and 12, confirmed by diffing a rendered corner's
+profile against the export's row by row. Where the file and the export disagree, the
+export wins, because it is what the screen is judged against.
+
+The loop, run component by component:
+
+1. **Probe** the export for a value.
+2. **Write** the component to it.
+3. **Render** it with Playwright at 1440x750 and read the real boxes.
+4. **Diff** the render against the export, ranked worst-first.
+5. Repeat on the worst item.
+
+Claude Code ran that loop under the working agreement in [`CLAUDE.md`](CLAUDE.md): it
+stages changes and stops, every diff was reviewed before it became a commit, and missing
+design assets were asked for rather than substituted.
 
 ## Stack
 
@@ -111,3 +134,22 @@ export into numbers, plus the diff harness used to check a render against it.
 The Figma export on top, the deployed app underneath, both 1440x750.
 
 ![The Figma export above, the deployed app below, both at 1440x750](docs/screenshots/fidelity.png)
+
+## Running it locally
+
+```sh
+pnpm install
+pnpm dev
+```
+
+| Command          | Purpose                        |
+| ---------------- | ------------------------------ |
+| `pnpm dev`       | Dev server                     |
+| `pnpm build`     | Typecheck + production build   |
+| `pnpm preview`   | Serve the production build     |
+| `pnpm lint`      | ESLint                         |
+| `pnpm typecheck` | TypeScript, no emit            |
+| `pnpm test`      | Vitest + React Testing Library |
+| `pnpm format`    | Prettier                       |
+
+CI runs format, lint, typecheck, test and build on every push and PR.
