@@ -3,29 +3,24 @@
 A pixel-faithful rebuild of the Crono dashboard screen from the provided Figma design, in
 React + TypeScript.
 
-**Live:** <https://frontend-challenge-crono.vercel.app> — Vercel, built from `main`, with
+**Live:** <https://crm-dashboard-crono.vercel.app> — Vercel, built from `main`, with
 a preview deployment on every PR.
 
 > Frontend engineer assessment.
 
 ![The dashboard at 1440x750, the width the design is drawn at](docs/screenshots/dashboard.png)
 
-## Quick start
+## How it was built
 
-```sh
-pnpm install
-pnpm dev
-```
+Built with [Claude Code](https://claude.com/claude-code) as the coding agent and the
+Figma MCP server as a second design source.
 
-| Command          | Purpose                        |
-| ---------------- | ------------------------------ |
-| `pnpm dev`       | Dev server                     |
-| `pnpm build`     | Typecheck + production build   |
-| `pnpm preview`   | Serve the production build     |
-| `pnpm lint`      | ESLint                         |
-| `pnpm typecheck` | TypeScript, no emit            |
-| `pnpm test`      | Vitest + React Testing Library |
-| `pnpm format`    | Prettier                       |
+- **Claude Code** wrote the code, phase by phase, under the working agreement in
+  [`CLAUDE.md`](CLAUDE.md): it stages changes and stops, and every diff was reviewed
+  before it became a commit. Missing design assets were requested rather than
+  substituted.
+- **The Figma MCP** read the layer geometry of an editable copy of the design, which was
+  cross-checked against the PNG export. Where the two disagree, the export wins.
 
 ## Stack
 
@@ -109,3 +104,12 @@ value and the method behind it.
 The Figma export on top, the deployed app underneath, both 1440x750.
 
 ![The Figma export above, the deployed app below, both at 1440x750](docs/screenshots/fidelity.png)
+
+## Running it locally
+
+```sh
+pnpm install
+pnpm dev
+```
+
+`pnpm build`, `pnpm test`, `pnpm lint`, `pnpm typecheck` and `pnpm format` cover the
