@@ -29,7 +29,7 @@ export function PerformanceCard({
         <CardTitle>{month}&rsquo;s performance</CardTitle>
         <button
           type="button"
-          className="inline-flex -translate-y-[3px] items-center gap-1.5 text-body leading-[22px] font-semibold text-brand-strong"
+          className="inline-flex -translate-y-[3px] items-center gap-1.5 text-body leading-[22px] font-semibold text-brand-strong transition-opacity hover:opacity-80"
         >
           Edit KPIs
           <PencilIcon aria-hidden className="size-3.5" />

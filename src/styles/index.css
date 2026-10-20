@@ -133,6 +133,16 @@
     line-height: var(--text-body--line-height);
   }
 
+  /*
+   * Tailwind v4 dropped the Preflight rule that gave buttons a pointer cursor;
+   * v3 had it. Without this every control on the screen shows an arrow and the
+   * page reads as inert.
+   */
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
+
   /* Visible only when navigating by keyboard, but unmissable when it is. */
   :focus-visible {
     @apply outline-2 outline-offset-2 outline-brand-strong;

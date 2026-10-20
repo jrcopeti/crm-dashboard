@@ -64,7 +64,10 @@ export function TaskTile({
   )
 
   return actionable ? (
-    <button type="button" className={shell}>
+    <button
+      type="button"
+      className={cn(shell, 'transition hover:brightness-95')}
+    >
       {body}
     </button>
   ) : (

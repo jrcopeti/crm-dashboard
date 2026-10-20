@@ -69,7 +69,7 @@ export function AvatarStack({
           {...person}
           alt={person.name}
           size={size}
-          className={cn('ring-2 ring-card', index > 0 && '-ml-2')}
+          className={cn(index > 0 && '-ml-2')}
         />
       ))}
     </span>

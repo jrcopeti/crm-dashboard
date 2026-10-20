@@ -30,7 +30,9 @@ coverage
 # Playwright MCP artefacts
 .playwright-mcp
 
-# Working notes and the design-measurement toolkit. Useful while building,
-# but not part of the deliverable — see the top of CLAUDE.md.
+# Working notes — see the top of CLAUDE.md.
 PLAN.md
-.design-tools
+
+# The measurement toolkit is tracked; its dependencies and scratch output are not.
+.design-tools/node_modules
+.design-tools/out

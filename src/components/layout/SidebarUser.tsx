@@ -24,10 +24,10 @@ export function SidebarUser({
       <img src={avatarUrl} alt="" className="size-8 shrink-0" />
       {!collapsed && (
         <span className="min-w-0">
-          <span className="block text-body leading-5 font-medium whitespace-nowrap text-ink">
+          <span className="block text-body leading-5 whitespace-nowrap text-ink">
             {name}
           </span>
-          <span className="block text-meta leading-4 text-muted">
+          <span className="block text-body leading-5 text-muted">
             {jobTitle}
           </span>
         </span>
